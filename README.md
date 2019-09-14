@@ -11,7 +11,7 @@
     go run main.go
 
 # frontend
-    cd frontend
+    cd singo
     npm install
     npm run serve
 
