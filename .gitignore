@@ -10,3 +10,10 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+# other
+.vscode/
+/backend/.env
+/frontend/node_modules/* 
+/docker/data/*
+go.sum
