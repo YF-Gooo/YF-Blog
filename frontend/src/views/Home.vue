@@ -1,163 +1,144 @@
-
 <template>
-  <div class="home">
-    <el-container>
-        <el-container>
-        <el-main>
-            <el-row>
-                <div v-for="o in 8" :key="o" class="text item">
-                    <el-card class="box-card" :body-style="{ padding: '0px',height:'150px'}" shadow="hover">
-                    <el-col :span="20"> 
-                    <div class="article-title">
-                    {{'文章标题' + o }}
-                    </div>
-                    <div class="article-content">
-                    {{'文章描述:'+'博客园是一个面向开发者的知识分享社区。自创建以来,博客园一直致力并专注于为开发者打造一个纯净的技术交流社区,推动并帮助开发者通过互联网分享知识,从而让更多'}}
-                    </div>
-                    
-                    </el-col>
-                    <el-col :span="4">
-                    <div class="bottom clearfix">
-                        <span class="article-comment">
-                            <el-badge :value="1" class="item" type="primary">
-                                <el-button size="small">评论</el-button>
-                            </el-badge>
-                            <el-badge :value="3" class="item" type="primary">
-                                <el-button size="small">转发</el-button>
-                            </el-badge>
-                        </span>
-                        <div class="time">
-                        <time >{{ currentDate }}</time>
-                        </div>
-                    </div>
-                    </el-col>
-                    </el-card>
-                </div>
-            </el-row>
-            <div class="block">
-                <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-                </el-pagination>
-            </div>
-        </el-main>
-        <el-aside width="400px">
-            <el-calendar v-model="currentDate">
-            </el-calendar>
-            <el-carousel indicator-position="outside" style="margin-top: 100px;">
-                <el-carousel-item v-for="item in 4" :key="item">
-                <h3>{{ item }}</h3>
-                </el-carousel-item>
-            </el-carousel>
-        </el-aside>
-    </el-container>
-    <el-footer>此博客归属于YF</el-footer>
-    </el-container>
+  <div class="user-activity" >
+    <div class="post" v-for="(item,index) of list" :key="index">
+      <div class="user-block">
+        <img class="img-circle" :src="'https://wpimg.wallstcn.com/57ed425a-c71e-4201-9428-68760c0537c4.jpg'+avatarPrefix">
+        <span class="username text-muted">Iron Man</span>
+        <span class="description">Shared publicly - 7:30 PM today</span>
+      </div>
+      <p class="content">
+        Lorem ipsum represents a long-held tradition for designers,
+        typographers and the like. Some people hate it and argue for
+        its demise, but others ignore the hate as they create awesome
+        tools to help create filler text for everyone from bacon lovers
+        to Charlie Sheen fans.
+        Lorem ipsum represents a long-held tradition for designers,
+        typographers and the like. Some people hate it and argue for
+        its demise, but others ignore the hate as they create awesome
+        tools to help create filler text for everyone from bacon lovers
+        to Charlie Sheen fans.
+        Lorem ipsum represents a long-held tradition for designers,
+        typographers and the like. Some people hate it and argue for
+        its demise, but others ignore the hate as they create awesome
+        tools to help create filler text for everyone from bacon lovers
+        to Charlie Sheen fans.
+      </p>
+      <ul class="list-inline">
+        <li>
+          <span class="link-black text-sm">
+            <i class="el-icon-share" />
+            Share
+          </span>
+        </li>
+        <li>
+          <span class="link-black text-sm">
+            <i class="el-icon-apple">Like </i>
+          </span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import store from "@/store";
-import Navbar from '@/components/Navbar'
+const avatarPrefix = '?imageView2/1/w/80/h/80'
+const carouselPrefix = '?imageView2/2/h/440'
+
 export default {
-  methods: {
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
-    },
-  name: 'home',
-  components: {
-      Navbar,
-    // Admin
-  },
   data() {
     return {
-      currentDate: new Date(),
-      currentPage4: 4,
-    };
-  },
-  store,
-  
+      list:[1,2,3,4,5,6],
+      carouselImages: [
+        'https://wpimg.wallstcn.com/9679ffb0-9e0b-4451-9916-e21992218054.jpg',
+        'https://wpimg.wallstcn.com/bcce3734-0837-4b9f-9261-351ef384f75a.jpg',
+        'https://wpimg.wallstcn.com/d1d7b033-d75e-4cd6-ae39-fcd5f1c0a7c5.jpg',
+        'https://wpimg.wallstcn.com/50530061-851b-4ca5-9dc5-2fead928a939.jpg'
+      ],
+      avatarPrefix,
+      carouselPrefix,
+
+    }
+  }
 }
 </script>
 
-
-<style>
-  .item {
-    margin-right: 20px;
+<style lang="scss" scoped>
+.user-activity {
+  margin: 0 20%;
+  margin-top:30px;
+  .user-block {
+    .description {
+      display: block;
+      padding: 2px 0;
     }
-  .time {
-    font-size: 10px;
-    color: #999;
-    text-align: right;
-  }
-  
-  .bottom {
-    margin-top: 100px;
-    margin-left: 20px;
-    line-height: 12px;
-    position: relative
+
+    .username{
+      font-size: 16px;
+      color: #000;
+    }
+
+
+    .img-circle {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      float: left;
+    }
+
+    span {
+      font-weight: 500;
+      font-size: 12px;
+    }
   }
 
-  .button {
-    padding: 0;
-    float: right;
+  .post {
+    font-size: 14px;
+    border-bottom: 1px solid #d2d6de;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    color: #666;
+    text-align:left;
+    padding-left: 10px;
+    .image {
+      width: 100%;
+      height: 100%;
+
+    }
+
+    .user-images {
+      padding-top: 20px;
+    }
   }
 
-  .clearfix:before,
-  .clearfix:after {
-      display: table;
-      content: "";
-  }
-  
-  .clearfix:after {
-      clear: both
-  }
-  .article-title{
-    padding: 0%;
-    text-align: left;
-    margin-left: 20px;
-  }
-  .article-content{
-    padding: 0%;
-    padding-right: 20%;
-    margin-top: 10px;
-    font-size: 13px;
-    margin-left: 20px;
-    text-align: left;
-  }
-  .el-card{
-    margin-left: 4%;
-  }
-  .el-card__body{ 
-    text-align: left;
-  }
-  .article-comment{
-      padding-left: 5%;
-  }
-  .el-carousel__item h3 {
-    color: #475669;
-    font-size: 18px;
-    opacity: 0.75;
-    line-height: 300px;
-    margin: 0;
-  }
-  
-  .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-  }
-  
-  .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
+  .list-inline {
+    padding-left: 10px;
+    margin-left: -5px;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      padding-right: 5px;
+      padding-left: 5px;
+      font-size: 13px;
+    }
+
+    .link-black {
+
+      &:hover,
+      &:focus {
+        color: #999;
+      }
+    }
   }
 
+}
+
+.box-center {
+  margin: 0 auto;
+  display: table;
+}
+
+.text-muted {
+  color: #777;
+}
 </style>

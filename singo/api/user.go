@@ -2,7 +2,7 @@ package api
 
 import (
 	"singo/serializer"
-	"singo/service"
+	service "singo/service/user"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -19,6 +19,10 @@ func UserRegister(c *gin.Context) {
 			c.JSON(200, res)
 		}
 	} else {
+		// for k, v := range c.Request.PostForm {
+		// 	fmt.Printf("k:%v\n", k)
+		// 	fmt.Printf("v:%v\n", v)
+		// }
 		c.JSON(200, ErrorResponse(err))
 	}
 }
@@ -35,7 +39,6 @@ func UserLogin(c *gin.Context) {
 			s.Clear()
 			s.Set("user_id", user.ID)
 			s.Save()
-
 			res := serializer.BuildUserResponse(user)
 			c.JSON(200, res)
 		}

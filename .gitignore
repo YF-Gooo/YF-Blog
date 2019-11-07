@@ -13,7 +13,7 @@
 
 # other
 .vscode/
-/backend/.env
+/singo/.env
 /frontend/node_modules/* 
 /docker/data/*
 go.sum

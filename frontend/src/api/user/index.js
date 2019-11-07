@@ -1,16 +1,20 @@
 import axios from 'axios';
 
-// 创建视频
-const signUp = form => axios.post('/api/v1/admin/signup', form).then(res => res.data);
+// 注册
+const signUp = form => axios.post('/api/v1/user/register', form).then(res => res.data);
 
-// 读视频详情
+// 获取用户
 const getUser = name => axios.get(`/api/v1/admin/getuser/${name}`).then(res => res.data);
 
-// 读取视频列表
-const signIn = form => axios.get('/api/v1/admin/signin').then(res => res.data);
+// 登录
+const signIn = form => axios.post('/api/v1/user/login',form).then(res => res.data);
+
+// 登出
+const logOut = () => axios.delete('/api/v1/user/logout').then(res => res.data);
 
 export {
   signUp,
   getUser,
   signIn,
+  logOut,
 };

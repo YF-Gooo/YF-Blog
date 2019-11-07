@@ -4,7 +4,6 @@ import (
 	"singo/api"
 	"singo/middleware"
 	"os"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,11 +15,11 @@ func NewRouter() *gin.Engine {
 	r.Use(middleware.Session(os.Getenv("SESSION_SECRET")))
 	r.Use(middleware.Cors())
 	r.Use(middleware.CurrentUser())
-
+	r.Static("/static", "./static")
 	// 路由
 	v1 := r.Group("/api/v1")
 	{
-		v1.POST("ping", api.Ping)
+		v1.GET("ping", api.Ping)
 
 		// 用户登录
 		v1.POST("user/register", api.UserRegister)
@@ -29,13 +28,27 @@ func NewRouter() *gin.Engine {
 		v1.POST("user/login", api.UserLogin)
 
 		// 需要登录保护的
-		auth := v1.Group("")
-		auth.Use(middleware.AuthRequired())
+		authed := v1.Group("/")
+		authed.Use(middleware.AuthRequired())
 		{
 			// User Routing
-			auth.GET("user/me", api.UserMe)
-			auth.DELETE("user/logout", api.UserLogout)
+			authed.GET("user/me", api.UserMe)
+			authed.DELETE("user/logout", api.UserLogout)
 		}
+		v1.POST("uploadimage",api.UploadImage)
+		v1.GET("listimage",api.ListImage) 
+		v1.POST("article", api.CreateArticle)
+		v1.GET("article/:id", api.ShowArticle)
+		v1.GET("articles", api.ListArticle)
+		v1.PUT("article/:id", api.UpdateArticle)
+		v1.DELETE("article/:id", api.DeleteArticle)
+
+		v1.POST("video", api.CreateVideo)
+		v1.GET("video/:id", api.ShowVideo)
+		v1.GET("videos", api.ListVideo)
+		v1.PUT("video/:id", api.UpdateVideo)
+		v1.DELETE("video/:id", api.DeleteVideo)
 	}
 	return r
 }
+

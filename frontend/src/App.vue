@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <el-header style="padding:0px"><Navbar v-if="!$store.state.login"></Navbar></el-header>
+    <el-header style="padding:0px;">
+      <Navbar></Navbar>
+    </el-header>
     <router-view/>
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
-import NavbarAdmin from '@/components/NavbarAdmin'
+import Navbar from '@/layers/Navbar'
 import store from "@/store";
 export default {
   name: 'App',
@@ -19,7 +20,6 @@ export default {
   store,
   components: {
     Navbar,
-    NavbarAdmin,
   },
 }
 </script>
@@ -33,11 +33,11 @@ export default {
   color: #2c3e50;
   height:100%;
 }
-#nav {
-  padding: 30px;
+.navbar {
   a {
     font-weight: bold;
     color: #2c3e50;
+    text-decoration:none;
     &.router-link-exact-active {
       color: #42b983;
     }

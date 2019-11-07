@@ -1,7 +1,6 @@
 package model
 
 import (
-	"singo/util"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -19,11 +18,11 @@ func Database(connString string) {
 	db.LogMode(true)
 	// Error
 	if err != nil {
-		util.Log().Panic("连接数据库不成功", err)
+		panic(err)
 	}
 	//设置连接池
 	//空闲
-	db.DB().SetMaxIdleConns(50)
+	db.DB().SetMaxIdleConns(20)
 	//打开
 	db.DB().SetMaxOpenConns(100)
 	//超时

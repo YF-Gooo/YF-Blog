@@ -1,10 +1,10 @@
 <template>
   <div id="sign_wrap">
-    <h1>后台管理</h1>
-    <el-input v-model="avatar" placeholder="头像"></el-input>
-    <el-input v-model="name" placeholder="请输入用户名"></el-input>
+    <h1>用户注册</h1>
+    <el-input v-model="nickname" placeholder="NickName"></el-input>
+    <el-input v-model="user_name" placeholder="请输入用户名"></el-input>
     <el-input v-model="password" placeholder="请输入密码" type="password"></el-input>
-    <el-input v-model="val_password" placeholder="请再次输入密码" type="val_password"></el-input>
+    <el-input v-model="password_confirm" placeholder="请再次输入密码" type="password"></el-input>
     <el-button @click="signup">注册</el-button>
   </div>
 </template>
@@ -15,64 +15,56 @@ export default {
   name: "signin",
   data() {
     return {
-      avatar:"",
-      name: "",
+      nickname:"",
+      user_name: "",
       password: "",
-      val_password:"",
-      hasName: false // 用户名被占
+      password_confirm:"",
     };
   },
   mounted: function() {},
   methods: {
     signup: function() {
       let _this = this;
-      if (this.name.length < 6) {
+      if (this.nickname.length < 3) {
+        this.$message.error("用户名不能为空或小于三个字符");
+        return;
+      }
+
+      if (this.user_name.length < 6) {
         this.$message.error("用户名不能为空或小于六个字符");
         return;
       }
 
-      if (this.password.length < 6) {
-        this.$message.error("密码不能为空或小于六个字符");
+      if (this.password.length < 8) {
+        this.$message.error("密码不能为空或小于八个字符");
         return;
       }
 
-      if (this.password !=this.val_password) {
+      if (this.password !=this.password_confirm) {
         this.$message.error("两次输入密码不一样");
         return;
       }
-      API.getUser(this.name).then(
-        response => {
-          if (response.body.name === _this.name) {
-            _this.$message.error("该用户已存在");
-            _this.name = "";
-            // 由于异步，name的改变比正常流执行得慢，所以不能通过判断name去执行是否post
-            // 所以我把post移入else中，而不是在外面通过判断name执行
-          } else {
-            let obj = {
-              avatar:_this.avatar,
-              name: _this.name,
-              password: _this.password
-            };
-
-            API.signUp({
-                userInfo: obj
-              })
-              .then(
-                response => {
-                  _this.$message({
-                    message: "注册成功",
-                    type: "success"
-                  });
-                },
-                response => console.log("注册失败" + response)
-              );
-          }
-        },
-        response => console.log(response)
-      );
-    },
+      let obj = {
+        nickname:_this.nickname,
+        user_name: _this.user_name,
+        password: _this.password,
+        password_confirm:_this.password_confirm,
+      };
+      API.signUp(obj
+        )
+        .then(
+          response => {
+            console.log(response)
+            _this.$message({
+              message: "注册成功",
+              type: "success"
+            });
+          },
+          response => console.log("注册失败" + response)
+        );
+    }
   }
-};
+}
 </script>
 
 <style>
