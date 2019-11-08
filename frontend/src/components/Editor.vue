@@ -1,18 +1,18 @@
 <template>
     <div style="margin:2% 10%;">
         <div style="margin: 20px 0;padding-left:20px;width:20%;">
-        <el-divider content-position="left">标题</el-divider>
+        <el-divider content-position="left"><span style = "font-size:20px;font-weight:bolder;color:grey;">标题</span></el-divider>
         <el-input type="text" placeholder="请输入标题" v-model="title" maxlength="20" show-word-limit >
         </el-input>
         </div>
         <div style="margin: 20px 0;padding-left:20px; width:30%;">
-        <el-divider content-position="left">描述</el-divider>
+        <el-divider content-position="left" style = "font-size:15px;font-weight:bolder;color:grey;">描述</el-divider>
         <el-input type="textarea" placeholder="请输入描述" v-model="description" maxlength="30" show-word-limit>
         </el-input>
         </div>
-        <mavon-editor style="min-height: 600px;" ref=md v-model="text" @imgAdd="imgAdd" @imgDel="imgDel" @save="saveDoc" @change="updateDoc"></mavon-editor>
+        <mavon-editor style="min-height: 600px;" ref=md v-model="markdown" :language="language" @imgAdd="imgAdd" @imgDel="imgDel" @save="saveDoc"></mavon-editor>
         <el-row>
-            <el-button style="margin-top:30px;" round  @click="saveDoc">发布</el-button>
+            <el-button style="margin-top:30px;" round  @click="uploadDoc">发布</el-button>
             <el-button type="success" style="margin-top:30px;" round>草稿</el-button>
         </el-row>
     </div>
@@ -32,7 +32,8 @@ export default {
             title: '',
             description: '',
             img_file : {},
-            text : ""
+            markdown : "",
+            language : "zh-CN"
         }
     },
     methods: {
@@ -57,20 +58,46 @@ export default {
                 this.$refs.md.$img2Url(pos, url.data.msg);
             })
         },
+
         imgDel(pos) {
             delete this.img_file[pos];
         },
-        updateDoc(markdown, text) {
-            console.log("markdown内容: " + markdown);
-            console.log("html内容:" + text);
-        },
+
+        // updateDoc(markdown, text) {
+        //     console.log("markdown内容: " + markdown);
+        //     console.log("html内容:" + text);
+        // },
+
         saveDoc(markdown, text) {
             let _this = this;
             let obj = {
                 title:_this.title,
                 info: _this.description,
-                content: text,
+                markdown: markdown,
             };
+            console.log(text);
+            API.createDoc(obj
+                )
+                .then(
+                response => {
+                    console.log(response)
+                    _this.$message({
+                    message: "上传成功",
+                    type: "success"
+                    });
+                },
+                response => console.log("上传失败" + response)
+                );
+        },
+        
+        uploadDoc() {
+            let _this = this;
+            let obj = {
+                title:_this.title,
+                info: _this.description,
+                markdown :_this.markdown,
+            };
+            console.log(obj);
             API.createDoc(obj
                 )
                 .then(

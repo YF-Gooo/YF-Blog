@@ -9,6 +9,6 @@ type Article struct {
 	Info  string
 	UserName  string
 	Tag   string
-	Content string
+	Markdown string
 	Public bool
 }

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import UserPage from './views/UserPage.vue'
 import ArticleList from './components/ArticleList.vue'
+import ArticlePage from './views/ArticlePage.vue'
 import Editor from './components/Editor.vue'
 
 Vue.use(Router)
@@ -25,6 +26,11 @@ export default new Router({
       path: '/articlelist',
       name: 'articlelist',
       component: ArticleList
+    },
+    {
+      path: '/articlepage',
+      name: 'articlepage',
+      component: ArticlePage
     },
     {
       path: '/editor',

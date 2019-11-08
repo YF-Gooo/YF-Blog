@@ -9,6 +9,7 @@ import (
 type UpdateArticleService struct {
 	Title string `form:"title" json:"title" binding:"required,min=2,max=30"`
 	Info  string `form:"info" json:"info" binding:"max=300"`
+	Markdown  string `form:"markdown" json:"markdown" binding:"max=100000"`
 }
 
 // Update 更新文章

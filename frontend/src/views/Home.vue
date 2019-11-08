@@ -1,27 +1,14 @@
 <template>
-  <div class="user-activity" >
-    <div class="post" v-for="(item,index) of list" :key="index">
-      <div class="user-block">
-        <img class="img-circle" :src="'https://wpimg.wallstcn.com/57ed425a-c71e-4201-9428-68760c0537c4.jpg'+avatarPrefix">
-        <span class="username text-muted">Iron Man</span>
-        <span class="description">Shared publicly - 7:30 PM today</span>
-      </div>
+  <div class="article-list" >
+    <div class="post" v-for="(item,index) of articleList" :key="index">
+      <h2 class="title">
+          {{item.title}}
+      </h2>
+      <p class="info">
+          <span>摘要：</span>{{item.info}}
+      </p>
       <p class="content">
-        Lorem ipsum represents a long-held tradition for designers,
-        typographers and the like. Some people hate it and argue for
-        its demise, but others ignore the hate as they create awesome
-        tools to help create filler text for everyone from bacon lovers
-        to Charlie Sheen fans.
-        Lorem ipsum represents a long-held tradition for designers,
-        typographers and the like. Some people hate it and argue for
-        its demise, but others ignore the hate as they create awesome
-        tools to help create filler text for everyone from bacon lovers
-        to Charlie Sheen fans.
-        Lorem ipsum represents a long-held tradition for designers,
-        typographers and the like. Some people hate it and argue for
-        its demise, but others ignore the hate as they create awesome
-        tools to help create filler text for everyone from bacon lovers
-        to Charlie Sheen fans.
+          <span>内容：</span>{{item.markdown}}
       </p>
       <ul class="list-inline">
         <li>
@@ -41,38 +28,43 @@
 </template>
 
 <script>
-const avatarPrefix = '?imageView2/1/w/80/h/80'
-const carouselPrefix = '?imageView2/2/h/440'
-
+import * as API from "@/api/article/";
 export default {
   data() {
     return {
-      list:[1,2,3,4,5,6],
-      carouselImages: [
-        'https://wpimg.wallstcn.com/9679ffb0-9e0b-4451-9916-e21992218054.jpg',
-        'https://wpimg.wallstcn.com/bcce3734-0837-4b9f-9261-351ef384f75a.jpg',
-        'https://wpimg.wallstcn.com/d1d7b033-d75e-4cd6-ae39-fcd5f1c0a7c5.jpg',
-        'https://wpimg.wallstcn.com/50530061-851b-4ca5-9dc5-2fead928a939.jpg'
-      ],
-      avatarPrefix,
-      carouselPrefix,
-
+      articleList:[]
     }
-  }
+  },
+  async mounted(){
+        this.getArticleList()
+  },
+  methods: {
+        getArticleList() {
+            let _this = this;
+            API.getArticleList()
+                .then(
+                response => {
+                    console.log(response)
+                    _this.articleList=response.data
+                },
+                response => console.log("获取失败" + response)
+                );
+        },
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-.user-activity {
+.article-list {
   margin: 0 20%;
   margin-top:30px;
-  .user-block {
+  .article-block {
     .description {
       display: block;
       padding: 2px 0;
     }
 
-    .username{
+    .articlename{
       font-size: 16px;
       color: #000;
     }
@@ -84,7 +76,9 @@ export default {
       height: 40px;
       float: left;
     }
-
+    .info{
+      font-weight: bolder;
+    }
     span {
       font-weight: 500;
       font-size: 12px;
@@ -105,7 +99,7 @@ export default {
 
     }
 
-    .user-images {
+    .article-images {
       padding-top: 20px;
     }
   }

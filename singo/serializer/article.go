@@ -9,7 +9,7 @@ type Article struct {
 	Title     string `json:"title"`
 	Info      string `json:"info"`
 	UserName  string `json:"username"`
-	Content string `json:"content"`
+	Markdown string `json:"markdown"`
 	CreatedAt int64  `json:"created_at"`
 }
 
@@ -20,7 +20,7 @@ func BuildArticle(item model.Article) Article {
 		Title:     item.Title,
 		Info:      item.Info,
 		UserName:  item.UserName,
-		Content:    item.Content,
+		Markdown:	item.Markdown,
 		CreatedAt: item.CreatedAt.Unix(),
 	}
 }
