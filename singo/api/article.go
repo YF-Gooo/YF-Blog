@@ -3,6 +3,8 @@ package api
 import (
 	service "singo/service/article"
 	"github.com/gin-gonic/gin"
+	"singo/model"
+	"fmt"
 )
 
 
@@ -10,6 +12,12 @@ import (
 func CreateArticle(c *gin.Context) {
 	service := service.CreateArticleService{}
 	if err := c.ShouldBind(&service); err == nil {
+		user , _ := c.Get("user")
+		if u, ok := user.(*model.User); ok {
+			fmt.Println(u.UserName)
+			service.UserName = u.UserName
+		}
+		fmt.Println(service.UserName)
 		res := service.Create()
 		c.JSON(200, res)
 	} else {
