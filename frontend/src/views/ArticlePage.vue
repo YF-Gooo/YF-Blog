@@ -1,9 +1,15 @@
 <template>
-    <div style="margin:2% 20%;">
-        <el-row>
-        <el-button style="margin-top:100px;" round  @click="getArticle(1)">发布</el-button>
-        </el-row>
-        <mavon-editor style="min-height: 600px;" ref=md v-model="markdown" :language="language" :toolbarsFlag="toolbarsFlag" :subfield="subfield" :defaultOpen="preview" :editable="editable"  ></mavon-editor>
+    <div style="margin:1% 20%;">
+        <p class="title">
+          <span>{{this.title}}</span>
+        </p>
+        <p class="info">
+          <span>作者：{{this.username}}</span>
+        </p>
+        <p class="info">
+          <span>简介：{{this.info}}</span>{{this.info}}
+        </p>
+        <mavon-editor style="min-height: 600px;" ref=md v-model="markdown" :language="language" :toolbarsFlag="toolbarsFlag" :subfield="subfield" :defaultOpen="preview" :editable="editable" ></mavon-editor>
     </div>
 </template>
 <script>
@@ -17,16 +23,24 @@ export default {
     },
     data(){
         return {
+            id :0,
             title: '',
-            description: '',
+            info: '',
             markdown : "",
+            username : "",
             preview : "preview",
             editable : false,
             subfield : false,
             toolbarsFlag : false,
             language : "zh-CN",
+            ishljs:false,
+            boxShadow:false,
 
         }
+    },
+    mounted(){
+        this.id = this.$route.params.id
+        this.getArticle(this.id)
     },
     methods: {
         getArticle(id) {
@@ -36,11 +50,10 @@ export default {
                 .then(
                 response => {
                     console.log(response)
-                    _this.$message({
-                    message: "上传成功",
-                    type: "success"
-                    });
+                    _this.title = response.data.title
+                    _this.info = response.data.info
                     _this.markdown=response.data.markdown
+                    _this.username=response.data.username
                 },
                 response => console.log("上传失败" + response)
                 );
@@ -49,5 +62,36 @@ export default {
 }
 </script>
 <style>
+    .title{
+        font-size : 30px;
+        font-weight : bolder;
+        text-align:left;
+        color: #666;
+    }
+    .info{
+        font-size : 15px;
+        font-weight : bolder;
+        text-align:left;
+        color: #666;
+    }
+    .list-inline {
+        padding-left: 10px;
+        margin-left: -5px;
+        list-style: none;
 
+        li {
+        display: inline-block;
+        padding-right: 5px;
+        padding-left: 5px;
+        font-size: 13px;
+        }
+
+        .link-black {
+
+        &:hover,
+        &:focus {
+            color: #999;
+        }
+        }
+    }
 </style>

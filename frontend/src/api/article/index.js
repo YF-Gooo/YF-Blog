@@ -7,9 +7,10 @@ const getArticle = id => axios.get(`/api/v1/article/${id}`).then(res => res.data
 
 const getArticleList = () => axios.get(`/api/v1/articles`).then(res => res.data);
 
-
+const deleteArticle = id => axios.delete(`/api/v1/article/${id}`).then(res => res.data);
 export {
   createDoc,
   getArticle,
-  getArticleList
+  getArticleList,
+  deleteArticle
 };

@@ -16,4 +16,5 @@
 /singo/.env
 /frontend/node_modules/* 
 /docker/data/*
+/singo/cert/*
 go.sum

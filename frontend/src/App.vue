@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <el-header style="padding:0px;">
-      <Navbar></Navbar>
+      <NavBar></NavBar>
     </el-header>
     <router-view/>
   </div>
 </template>
 
 <script>
-import Navbar from '@/layers/Navbar'
+import NavBar from '@/layers/NavBar'
 import store from "@/store";
 export default {
   name: 'App',
@@ -19,7 +19,7 @@ export default {
   },
   store,
   components: {
-    Navbar,
+    NavBar,
   },
 }
 </script>

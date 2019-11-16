@@ -3,7 +3,10 @@
 本意是验证自己前后端能力。<br>
 本博客会用于记录我的日常生活，同时也作为我的学习笔记。
 
-
+# docker
+    cd docker 
+    docker-compose up -d
+    
 # singo
     cd backend
     export GOPROXY=https://mirrors.aliyun.com/goproxy/
@@ -23,7 +26,8 @@
     5.首页展示(Done)
     6.编辑页展示(Done)
     7.搜索功能(Pending)
-    8.文章管理
+    8.分页功能
+    9.文章管理
     
 # 参考了
     https://github.com/bydmm/singo

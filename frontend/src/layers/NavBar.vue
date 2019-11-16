@@ -15,6 +15,7 @@
           <el-col class="nav-menu" :span="1"><router-link to="/">首页</router-link></el-col>
           <el-col class="nav-menu" :span="1"><router-link to="/about">关于我</router-link></el-col>
           <el-col v-if="user!==''" class="nav-menu" :span="1"><router-link to="/editor">写文章</router-link></el-col>
+          <el-col v-if="user!==''" class="nav-menu" :span="1"><router-link to="/managehome">管理屋</router-link></el-col>
           <el-col :span="6" :offset="4">
             <el-input
               placeholder="请输入内容"

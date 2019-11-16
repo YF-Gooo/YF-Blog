@@ -7,10 +7,10 @@
         </div>
         <div style="margin: 20px 0;padding-left:20px; width:30%;">
         <el-divider content-position="left" style = "font-size:15px;font-weight:bolder;color:grey;">描述</el-divider>
-        <el-input type="textarea" placeholder="请输入描述" v-model="description" maxlength="30" show-word-limit>
+        <el-input type="textarea" placeholder="请输入描述" v-model="info" maxlength="30" show-word-limit>
         </el-input>
         </div>
-        <mavon-editor style="min-height: 600px;" ref=md v-model="markdown" :language="language" @imgAdd="imgAdd" @imgDel="imgDel" @save="saveDoc"></mavon-editor>
+        <mavon-editor style="min-height: 600px" ref=md v-model="markdown" :language="language" :subfield="subfield" @imgAdd="imgAdd" @imgDel="imgDel" @save="saveDoc"></mavon-editor>
         <el-row>
             <el-button style="margin-top:30px;" round  @click="uploadDoc">发布</el-button>
             <el-button type="success" style="margin-top:30px;" round>草稿</el-button>
@@ -30,10 +30,11 @@ export default {
     data(){
         return {
             title: '',
-            description: '',
+            info: '',
             img_file : {},
             markdown : "",
-            language : "zh-CN"
+            language : "zh-CN",
+            // subfield : false,
         }
     },
     methods: {
@@ -72,7 +73,7 @@ export default {
             let _this = this;
             let obj = {
                 title:_this.title,
-                info: _this.description,
+                info: _this.info,
                 markdown: markdown,
             };
             console.log(text);
@@ -94,7 +95,7 @@ export default {
             let _this = this;
             let obj = {
                 title:_this.title,
-                info: _this.description,
+                info: _this.info,
                 markdown :_this.markdown,
             };
             console.log(obj);
@@ -117,12 +118,12 @@ export default {
 <style>
 #editor {
     margin: auto;
-    width: 80%;
+    width: 50%;
     height: 580px;
 }
 .mveditor{
     margin: auto;
-    width: 100%;
+    width: 50%;
     
 }
 </style>

@@ -5,7 +5,8 @@ import UserPage from './views/UserPage.vue'
 import ArticleList from './components/ArticleList.vue'
 import ArticlePage from './views/ArticlePage.vue'
 import Editor from './components/Editor.vue'
-
+import ArticleManage from './components/ArticleManage.vue'
+import ManageHome from './views/ManageHome.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -28,7 +29,7 @@ export default new Router({
       component: ArticleList
     },
     {
-      path: '/articlepage',
+      path: '/articlepage/:id',
       name: 'articlepage',
       component: ArticlePage
     },
@@ -36,6 +37,16 @@ export default new Router({
       path: '/editor',
       name: 'editor',
       component: Editor
+    },
+    {
+      path: '/articlemanage',
+      name: 'articlemanage',
+      component: ArticleManage
+    },
+    {
+      path: '/managehome',
+      name: 'managehome',
+      component: ManageHome
     },
     {
       path: '/about',
