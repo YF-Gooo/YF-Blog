@@ -45,9 +45,11 @@ func ListArticle(c *gin.Context) {
 
 // Update 更新文章的接口
 func UpdateArticle(c *gin.Context) {
+	user , _ := c.Get("user")
+	u, _ := user.(*model.User)
 	service := service.UpdateArticleService{}
 	if err := c.ShouldBind(&service); err == nil {
-		res := service.Update(c.Param("id"))
+		res := service.Update(u.UserName,c.Param("id"))
 		c.JSON(200, res)
 	} else {
 		c.JSON(200, ErrorResponse(err))
@@ -56,7 +58,9 @@ func UpdateArticle(c *gin.Context) {
 
 // DeleteVideo 删除视频的接口
 func DeleteArticle(c *gin.Context) {
+	user , _ := c.Get("user")
+	u, _ := user.(*model.User)
 	service := service.DeleteArticleService{}
-	res := service.Delete(c.Param("id"))
+	res := service.Delete(u.UserName,c.Param("id"))
 	c.JSON(200, res)
 }

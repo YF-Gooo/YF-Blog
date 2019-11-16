@@ -86,7 +86,7 @@ export default {
           window.location.href="/articlepage/"+row.id
         },
         handleEdit(row) {
-          console.log(row)
+          window.location.href="/updatearticlepage/"+row.id
         },
         handleDelete(row) {
           let _this = this;
@@ -95,13 +95,20 @@ export default {
           .then(
             response => {
               console.log(response)
-              _this.$message({
-                message: "删除成功",
-                type: "success"
-              });
-              _this.articleList = _this.articleList.filter(function(item) {
-                return item.title != row.title
-              });
+              if (response.status!==404) {
+                _this.$message({
+                  message: "删除成功",
+                  type: "success"
+                });
+                _this.articleList = _this.articleList.filter(function(item) {
+                  return item.title != row.title
+                });
+              } else{
+                _this.$message({
+                  message: "删除失败",
+                  type: "fail"
+                })
+              }
             },
             response => console.log("删除失败" + response)
           );

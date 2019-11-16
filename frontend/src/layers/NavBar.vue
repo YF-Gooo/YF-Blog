@@ -33,7 +33,8 @@
                 <el-dropdown-menu slot="dropdown" trigger="click">
                   <el-dropdown-item command="/">首页</el-dropdown-item>
                   <el-dropdown-item command="/about">关于我</el-dropdown-item>
-                  <el-dropdown-item command="/about">管理</el-dropdown-item>
+                  <el-dropdown-item command="/editor">写文章</el-dropdown-item>
+                  <el-dropdown-item command="/managehome">管理屋</el-dropdown-item>
                   <el-dropdown-item disabled>其他</el-dropdown-item>
                   <el-dropdown-item divided ><el-button size="mini" type="info" @click="logout">注销</el-button></el-dropdown-item>
                 </el-dropdown-menu>

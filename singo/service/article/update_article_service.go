@@ -3,6 +3,7 @@ package service
 import (
 	"singo/model"
 	"singo/serializer"
+	"fmt"
 )
 
 // UpdateArticleService 更新文章的服务
@@ -13,7 +14,7 @@ type UpdateArticleService struct {
 }
 
 // Update 更新文章
-func (service *UpdateArticleService) Update(id string) serializer.Response {
+func (service *UpdateArticleService) Update(user string,id string) serializer.Response {
 	var Article model.Article
 	err := model.DB.First(&Article, id).Error
 	if err != nil {
@@ -23,9 +24,18 @@ func (service *UpdateArticleService) Update(id string) serializer.Response {
 			Error:  err.Error(),
 		}
 	}
-
+	fmt.Println(user)
+	fmt.Println(Article.UserName)
+	if user!=Article.UserName {
+		return serializer.Response{
+			Status: 404,
+			Msg:    "没有权限更改",
+			Error:  "no permission",
+		}
+	}
 	Article.Title = service.Title
 	Article.Info = service.Info
+	Article.Markdown = service.Markdown
 	err = model.DB.Save(&Article).Error
 	if err != nil {
 		return serializer.Response{

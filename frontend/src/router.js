@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import UserPage from './views/UserPage.vue'
 import ArticleList from './components/ArticleList.vue'
 import ArticlePage from './views/ArticlePage.vue'
+import UpdateArticlePage from './views/UpdateArticlePage.vue'
 import Editor from './components/Editor.vue'
 import ArticleManage from './components/ArticleManage.vue'
 import ManageHome from './views/ManageHome.vue'
@@ -47,6 +48,11 @@ export default new Router({
       path: '/managehome',
       name: 'managehome',
       component: ManageHome
+    },
+    {
+      path: '/updatearticlepage/:id',
+      name: 'updatearticlepage',
+      component: UpdateArticlePage
     },
     {
       path: '/about',

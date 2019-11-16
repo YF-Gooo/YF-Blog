@@ -10,9 +10,9 @@
         <el-input type="textarea" placeholder="请输入描述" v-model="info" maxlength="30" show-word-limit>
         </el-input>
         </div>
-        <mavon-editor style="min-height: 600px" ref=md v-model="markdown" :language="language"  @imgAdd="imgAdd" @imgDel="imgDel" @save="saveDoc"></mavon-editor>
+        <mavon-editor style="min-height: 600px" ref=md v-model="markdown" @imgAdd="imgAdd" @imgDel="imgDel" @save="saveDoc"></mavon-editor>
         <el-row>
-            <el-button style="margin-top:30px;" round  @click="uploadDoc">发布</el-button>
+            <el-button style="margin-top:30px;" round  @click="updateDoc">更新</el-button>
             <el-button type="success" style="margin-top:30px;" round>草稿</el-button>
         </el-row>
     </div>
@@ -23,21 +23,38 @@ import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import * as API from "@/api/article/";
 export default {
-    name: 'editor',
+    name: 'updatearticlepage',
     components: {
         mavonEditor
     },
     data(){
         return {
+            id :0,
             title: '',
             info: '',
-            img_file : {},
             markdown : "",
-            language : "zh-CN",
-            // subfield : false,
         }
     },
+    mounted(){
+        this.id = this.$route.params.id
+        this.getArticle(this.id)
+    },
     methods: {
+        getArticle(id) {
+            let _this = this;
+            API.getArticle(id
+                )
+                .then(
+                response => {
+                    console.log(response)
+                    _this.title = response.data.title
+                    _this.info = response.data.info
+                    _this.markdown=response.data.markdown
+                    _this.username=response.data.username
+                },
+                response => console.log("获取失败" + response)
+                );
+        },
         // 绑定@imgAdd event
         imgAdd(pos, $file){
             // 第一步.将图片上传到服务器.
@@ -72,44 +89,60 @@ export default {
         saveDoc(markdown, text) {
             let _this = this;
             let obj = {
+                id:_this.id,
                 title:_this.title,
                 info: _this.info,
                 markdown: markdown,
             };
             console.log(text);
-            API.createDoc(obj
+            API.updateArticle(_this.id,obj
                 )
                 .then(
                 response => {
-                    console.log(response)
+                console.log(response)
+                if (response.status!==404) {
                     _this.$message({
-                    message: "上传成功",
+                    message: "更新成功",
                     type: "success"
                     });
+                } else{
+                    _this.$message({
+                    message: "更新失败",
+                    type: "fail"
+                    })
+                }
                 },
-                response => console.log("上传失败" + response)
+                response => console.log("更新失败" + response)
                 );
         },
         
-        uploadDoc() {
+        updateDoc() {
             let _this = this;
             let obj = {
+                id:_this.id,
                 title:_this.title,
                 info: _this.info,
                 markdown :_this.markdown,
             };
             console.log(obj);
-            API.createDoc(obj
+            API.updateArticle(_this.id,obj
                 )
                 .then(
                 response => {
-                    console.log(response)
+                console.log(response)
+                if (response.status!==404) {
                     _this.$message({
-                    message: "上传成功",
+                    message: "更新成功",
                     type: "success"
                     });
+                } else{
+                    _this.$message({
+                    message: "更新失败",
+                    type: "fail"
+                    })
+                }
                 },
-                response => console.log("上传失败" + response)
+                response => console.log("更新失败" + response)
                 );
         },
     }
