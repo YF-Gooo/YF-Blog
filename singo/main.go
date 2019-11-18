@@ -11,6 +11,7 @@ func main() {
 
 	// 装载路由
 	r := server.NewRouter()
-	// r.Run(":3000")
-	r.RunTLS(":3000", "./cert/server.crt", "./cert/server.key")
+	r.Run(":3000")
+	// 自签名https
+	// r.RunTLS(":3000", "./cert/server.crt", "./cert/server.key")
 }

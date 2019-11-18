@@ -13,3 +13,17 @@ type TrackedErrorResponse struct {
 	Response
 	TrackID string `json:"track_id"`
 }
+
+type DataList struct {
+	Items interface{} `json:"items"`
+	Total uint 		`json:"total"`
+}
+
+func BuildListResponse(items interface{},total uint) Response{
+	return Response{
+		Data:DataList{
+			Items:items,
+			Total:total,
+		},
+	}
+}

@@ -35,8 +35,49 @@ func ShowArticle(c *gin.Context) {
 // ListArticle 文章列表接口
 func ListArticle(c *gin.Context) {
 	service := service.ListArticleService{}
-	if err := c.ShouldBind(&service); err == nil {
+	if err := c.BindQuery(&service); err == nil {
 		res := service.List()
+		c.JSON(200, res)
+	} else {
+		c.JSON(200, ErrorResponse(err))
+	}
+}
+
+// UserListArticle 用户文章列表接口
+func UserListArticle(c *gin.Context) {
+	user , _ := c.Get("user")
+	u, _ := user.(*model.User)
+	service := service.ListArticleService{}
+	if err := c.ShouldBind(&service); err == nil {
+		res := service.UserList(u.UserName)
+		c.JSON(200, res)
+	} else {
+		c.JSON(200, ErrorResponse(err))
+	}
+}
+
+// SearchListArticle 用户文章列表接口
+func SearchListArticle(c *gin.Context) {
+	service := service.ListArticleService{}
+	if err := c.ShouldBind(&service); err == nil {
+		kw:=c.Query("kw")
+		fmt.Println(kw)
+		res := service.SearchList(kw)
+		c.JSON(200, res)
+	} else {
+		c.JSON(200, ErrorResponse(err))
+	}
+}
+
+// SearchListArticle 用户文章列表接口
+func UserSearchListArticle(c *gin.Context) {
+	user , _ := c.Get("user")
+	u, _ := user.(*model.User)
+	service := service.ListArticleService{}
+	if err := c.ShouldBind(&service); err == nil {
+		kw:=c.Query("kw")
+		fmt.Println(kw)
+		res := service.UserSearchList(u.UserName,kw)
 		c.JSON(200, res)
 	} else {
 		c.JSON(200, ErrorResponse(err))

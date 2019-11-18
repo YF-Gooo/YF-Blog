@@ -29,7 +29,7 @@ const (
 // GetUser 用ID获取用户
 func GetUser(ID interface{}) (User, error) {
 	var user User
-	result := DB.First(&user, ID)
+	result := DB.Find(&user, ID)
 	return user, result.Error
 }
 

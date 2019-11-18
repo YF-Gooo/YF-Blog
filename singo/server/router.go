@@ -40,6 +40,9 @@ func NewRouter() *gin.Engine {
 		v1.POST("article", api.CreateArticle)
 		v1.GET("article/:id", api.ShowArticle)
 		v1.GET("articles", api.ListArticle)
+		v1.GET("userarticles", api.UserListArticle)
+		v1.GET("searcharticles", api.SearchListArticle)
+		v1.GET("usersearcharticles", api.UserSearchListArticle)
 		v1.PUT("article/:id", api.UpdateArticle)
 		v1.DELETE("article/:id", api.DeleteArticle)
 
