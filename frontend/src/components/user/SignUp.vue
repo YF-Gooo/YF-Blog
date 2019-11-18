@@ -1,5 +1,5 @@
 <template>
-  <div id="sign_wrap">
+  <div id="signup_wrap">
     <h1>用户注册</h1>
     <el-input v-model="nickname" placeholder="NickName"></el-input>
     <el-input v-model="user_name" placeholder="请输入用户名"></el-input>
@@ -12,7 +12,7 @@
 <script>
 import * as API from "@/api/user/";
 export default {
-  name: "signin",
+  name: "signup",
   data() {
     return {
       nickname:"",
@@ -21,7 +21,6 @@ export default {
       password_confirm:"",
     };
   },
-  mounted: function() {},
   methods: {
     signup: function() {
       let _this = this;
@@ -69,17 +68,17 @@ export default {
 </script>
 
 <style>
-#sign_wrap {
+#signup_wrap {
   width: 300px;
   margin: 100px auto;
 }
 
-#sign_wrap h1 {
+#signup_wrap h1 {
   color: #383a42;
   padding: 10px;
 }
 
-#sign_wrap div {
+#signup_wrap div {
   padding-bottom: 20px;
 }
 </style>

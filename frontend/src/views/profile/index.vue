@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+
 import UserCard from './components/UserCard'
 import Activity from './components/Activity'
 import Timeline from './components/Timeline'
@@ -44,23 +44,16 @@ export default {
       activeTab: 'activity',
     }
   },
-  computed: {
-    ...mapGetters([
-      'name',
-      'avatar',
-      'roles'
-    ])
-  },
   created() {
     this.getUser()
   },
   methods: {
     getUser() {
       this.user = {
-        name: this.name,
-        role: this.roles.join(' | '),
+        name: "YF",
+        role: "DataScientist",
         email: 'admin@test.com',
-        avatar: this.avatar
+        avatar: ""
       }
     }
   }

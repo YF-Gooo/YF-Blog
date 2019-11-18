@@ -14,12 +14,13 @@
           </el-col>
           <el-col class="nav-menu" :span="1"><router-link to="/">首页</router-link></el-col>
           <el-col class="nav-menu" :span="1"><router-link to="/about">关于我</router-link></el-col>
-          <el-col v-if="user!==''" class="nav-menu" :span="1"><router-link to="/editor">写文章</router-link></el-col>
+          <el-col v-if="user!==''" class="nav-menu" :span="1"><router-link to="/createarticlepage">写文章</router-link></el-col>
           <el-col v-if="user!==''" class="nav-menu" :span="1"><router-link to="/managehome">管理屋</router-link></el-col>
           <el-col :span="6" :offset="4">
             <el-input
               placeholder="请输入内容"
-              v-model="text">
+              v-model="text"
+              @keyup.enter.native="handlesearch">
               <i slot="prefix" class="el-input__icon el-icon-search"></i>
             </el-input>
           </el-col>
@@ -33,7 +34,7 @@
                 <el-dropdown-menu slot="dropdown" trigger="click">
                   <el-dropdown-item command="/">首页</el-dropdown-item>
                   <el-dropdown-item command="/about">关于我</el-dropdown-item>
-                  <el-dropdown-item command="/editor">写文章</el-dropdown-item>
+                  <el-dropdown-item command="/createarticlepage">写文章</el-dropdown-item>
                   <el-dropdown-item command="/managehome">管理屋</el-dropdown-item>
                   <el-dropdown-item disabled>其他</el-dropdown-item>
                   <el-dropdown-item divided ><el-button size="mini" type="info" @click="logout">注销</el-button></el-dropdown-item>
@@ -50,14 +51,16 @@
 </template>
 <script>
 import * as API from "@/api/user/";
+import store from '@/store'
 export default {
   data() {
     return {
       avtarUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
       user:"",
-      text:""
+      text:"",
     };
   },
+  store,
   async mounted(){
     const {status,data:{data:{nickname}}} = await this.$axios.get("/api/v1/user/me")
     if (status===200){
@@ -80,6 +83,12 @@ export default {
           response => console.log("登出失败" + response)
         );
       },
+    handlesearch(){
+      let _this = this;
+      _this.$store.commit('changeSearchKW', _this.text)
+      _this.$router.push("/");
+      _this.text=""
+    },
     handleCommand(command) {
       let _this = this;
       _this.$router.push(command);

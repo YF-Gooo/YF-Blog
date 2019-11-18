@@ -35,7 +35,7 @@ export default {
           timestamp: '2019/4/23',
           title: 'Release New Version',
           content: 'PanJiaChen committed 2019/4/23 20:46'
-        }
+        },
       ]
     }
   }

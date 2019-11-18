@@ -1,5 +1,5 @@
 <template>
-  <div id="sign_wrap">
+  <div id="signin_wrap">
     <h1>后台管理</h1>
     <el-input v-model="user_name" placeholder="请输入用户名"></el-input>
     <el-input v-model="password" placeholder="请输入密码" type="password"></el-input>
@@ -17,7 +17,6 @@ export default {
       password: "",
     };
   },
-  mounted: function() {},
   methods: {
     signin: function() {
       let _this = this;
@@ -54,17 +53,17 @@ export default {
 </script>
 
 <style>
-#sign_wrap {
+#signin_wrap {
   width: 300px;
   margin: 100px auto;
 }
 
-#sign_wrap h1 {
+#signin_wrap h1 {
   color: #383a42;
   padding: 10px;
 }
 
-#sign_wrap div {
+#signin_wrap div {
   padding-bottom: 20px;
 }
 </style>

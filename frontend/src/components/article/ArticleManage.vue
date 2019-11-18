@@ -56,6 +56,16 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="block">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[14, 18]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -64,20 +74,56 @@ import * as API from "@/api/article/";
 export default {
   data() {
     return {
-      articleList:[]
+      articleList:[],
+      total: 0,
+      start: 0,
+      limit: 14,
+      currentPage :1
     }
   },
   async mounted(){
-        this.getArticleList()
+    let _this = this;
+    if (_this.amsearchkw===""){
+      _this.getUserArticleList(_this.start,_this.limit)
+    } else{
+      _this.getUserSearchArticleList(_this.start,_this.limit,_this.amsearchkw)
+    }
   },
   methods: {
-        getArticleList() {
+        handleSizeChange(val) {
+          let _this = this;
+          _this.limit=val
+        },
+        handleCurrentChange(val) {
+          let _this = this;
+          _this.currentPage=val
+          _this.start=_this.limit*(_this.currentPage-1)
+          if (_this.amsearchkw===""){
+            _this.getUserArticleList(_this.start,_this.limit)
+          } else{
+            _this.getUserSearchArticleList(_this.start,_this.limit,_this.amsearchkw)
+          }
+        },
+        getUserArticleList(start,limit) {
             let _this = this;
-            API.getArticleList()
+            API.getUserArticleList(start,limit)
                 .then(
                 response => {
                     console.log(response)
-                    _this.articleList=response.data
+                    _this.articleList=response.data.items
+                    _this.total = response.data.total
+                },
+                response => console.log("获取失败" + response)
+                );
+        },
+        getUserSearchArticleList(start,limit,kw) {
+            let _this = this;
+            API.getUserSearchArticleList(start,limit,kw)
+                .then(
+                response => {
+                    console.log(response)
+                    _this.articleList=response.data.items
+                    _this.total = response.data.total
                 },
                 response => console.log("获取失败" + response)
                 );
@@ -101,7 +147,7 @@ export default {
                   type: "success"
                 });
                 _this.articleList = _this.articleList.filter(function(item) {
-                  return item.title != row.title
+                  return item.id != row.id
                 });
               } else{
                 _this.$message({
@@ -114,6 +160,16 @@ export default {
           );
         }
     },
+  computed: {
+    amsearchkw(){      
+      return this.$store.state.amkw
+    }
+  },
+  watch:{
+    amsearchkw(){
+        this.getUserSearchArticleList(0,this.limit,this.$store.state.amkw)
+    }
+  },
   filters: {
       getTimestamp: function (timestamp) {
         console.log(timestamp)

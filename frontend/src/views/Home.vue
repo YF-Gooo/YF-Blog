@@ -25,11 +25,20 @@
             <i class="el-icon-apple">Like </i>
           </span>
         </li>
-
         <li>
           <span>时间：{{item.created_at| getTimestamp}}</span>
         </li>
       </ul>
+    </div>
+    <div class="block">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[6, 12]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -39,25 +48,71 @@ import * as API from "@/api/article/";
 export default {
   data() {
     return {
-      articleList:[]
+      articleList:[],
+      total: 0,
+      start: 0,
+      limit: 6,
+      currentPage :1
     }
   },
   async mounted(){
-        this.getArticleList()
+    let _this = this;
+    if (_this.searchkw===""){
+      _this.getArticleList(_this.start,_this.limit)
+    } else{
+      _this.getSearchArticleList(_this.start,_this.limit,_this.searchkw)
+    }
   },
   methods: {
-        getArticleList() {
+        handleSizeChange(val) {
+          let _this = this;
+          _this.limit=val
+        },
+        handleCurrentChange(val) {
+          let _this = this;
+          _this.currentPage=val
+          _this.start=_this.limit*(_this.currentPage-1)
+          if (_this.searchkw===""){
+            _this.getArticleList(_this.start,_this.limit)
+          } else{
+            _this.getSearchArticleList(_this.start,_this.limit,_this.searchkw)
+          }
+        },
+        getArticleList(start,limit) {
             let _this = this;
-            API.getArticleList()
+            API.getArticleList(start,limit)
                 .then(
                 response => {
                     console.log(response)
-                    _this.articleList=response.data
+                    _this.articleList=response.data.items
+                    _this.total = response.data.total
+                },
+                response => console.log("获取失败" + response)
+                );
+        },
+        getSearchArticleList(start,limit,kw) {
+            let _this = this;
+            API.getSearchArticleList(start,limit,kw)
+                .then(
+                response => {
+                    console.log(response)
+                    _this.articleList=response.data.items
+                    _this.total = response.data.total
                 },
                 response => console.log("获取失败" + response)
                 );
         },
     },
+  computed: {
+    searchkw(){      
+      return this.$store.state.kw
+    }
+  },
+  watch:{
+    searchkw(){
+        this.getSearchArticleList(0,this.limit,this.$store.state.kw)
+    }
+  },
   filters: {
       getTimestamp: function (timestamp) {
         console.log(timestamp)

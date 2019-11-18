@@ -28,35 +28,35 @@
         <div class="user-bio-section-body">
           <div class="progress-item">
             <span>Vue</span>
-            <el-progress :percentage="70" />
+            <el-progress :percentage="40" />
           </div>
           <div class="progress-item">
             <span>JavaScript</span>
-            <el-progress :percentage="18" />
+            <el-progress :percentage="41" />
           </div>
           <div class="progress-item">
             <span>Css</span>
-            <el-progress :percentage="12" />
+            <el-progress :percentage="42" />
           </div>
           <div class="progress-item">
             <span>Python</span>
-            <el-progress :percentage="12" />
+            <el-progress :percentage="80" />
           </div>
           <div class="progress-item">
             <span>Golang</span>
-            <el-progress :percentage="70" />
+            <el-progress :percentage="50" />
           </div>
           <div class="progress-item">
-            <span>MachineLearning</span>
-            <el-progress :percentage="18" />
+            <span>Machine Learning</span>
+            <el-progress :percentage="60" />
           </div>
           <div class="progress-item">
             <span>Big Data</span>
-            <el-progress :percentage="12" />
+            <el-progress :percentage="45" />
           </div>
           <div class="progress-item">
             <span>Devops</span>
-            <el-progress :percentage="12" />
+            <el-progress :percentage="39" />
           </div>
         </div>
       </div>

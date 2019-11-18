@@ -8,7 +8,7 @@
 </template>
 <script>
 import SideBar from '@/layers/SideBar'
-import ArticleManage from '@/components/ArticleManage'
+import ArticleManage from '@/components/article/ArticleManage'
 export default {
     name: 'ManageHome',
     components: {

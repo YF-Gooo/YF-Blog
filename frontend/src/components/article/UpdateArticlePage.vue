@@ -11,6 +11,11 @@
         </el-input>
         </div>
         <mavon-editor style="min-height: 600px" ref=md v-model="markdown" @imgAdd="imgAdd" @imgDel="imgDel" @save="saveDoc"></mavon-editor>
+        <div style="margin: 20px 0;padding-left:20px;width:20%;">
+            <el-divider content-position="left" style = "font-size:15px;font-weight:bolder;color:grey;">标签</el-divider>
+            <el-input type="text" placeholder="请输入标签';'作为分割符" v-model="tag" maxlength="30" show-word-limit >
+            </el-input>
+        </div>
         <el-row>
             <el-button style="margin-top:30px;" round  @click="updateDoc">更新</el-button>
             <el-button type="success" style="margin-top:30px;" round>草稿</el-button>
@@ -33,6 +38,7 @@ export default {
             title: '',
             info: '',
             markdown : "",
+            tag:""
         }
     },
     mounted(){

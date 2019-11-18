@@ -1,5 +1,13 @@
 <template>
     <div style = "width:250px;height:100%">
+      <div style = "width:200px;margin-left: 10px;;margin-bottom: 20px;"> 
+        <el-input
+            placeholder="筛选"
+            v-model="text"
+            @keyup.enter.native="handlesearch">
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        </el-input>
+      </div>
       <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
       <el-radio-button :label="false">展开</el-radio-button>
       <el-radio-button :label="true">收起</el-radio-button>
@@ -35,21 +43,29 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        isCollapse: true
-      };
+import store from '@/store'
+export default {
+  data() {
+    return {
+      text:"",
+      isCollapse: true
+    };
+  },
+  store,
+  methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
     },
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handlesearch(){
+    let _this = this;
+    _this.$store.commit('changeAMSearchKW', _this.text)
+    _this.text=""
+    },
   }
+}
 </script>
 
 <style>
