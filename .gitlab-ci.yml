@@ -8,6 +8,7 @@ job1:
     tags:
         - alpha
     script:
+        - ls
         - echo "I am job1"
         - echo "I am in build stage"
         
@@ -16,6 +17,7 @@ job2:
     tags:
         - alpha
     script:
+        - touch 1.txt
         - echo "I am job2"
         - echo "I am in test stage"
         
@@ -24,5 +26,6 @@ job3:
     tags:
         - alpha
     script:
+        - touch 2.txt
         - echo "I am job3"
         - echo "I am in deploy stage"
