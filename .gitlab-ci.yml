@@ -8,7 +8,6 @@ job1:
     tags:
         - alpha
     script:
-        - ls
         - echo "I am job1"
         - echo "I am in build stage"
         
