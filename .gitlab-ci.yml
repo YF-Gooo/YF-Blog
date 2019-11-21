@@ -8,7 +8,7 @@ job1:
     tags:
         - alpha
     script:
-        - echo "I am job1"
+        - echo "I am job1">>1.txt
         - echo "I am in build stage"
         
 job2:
