@@ -17,7 +17,7 @@ job2:
     tags:
         - alpha
     script:
-        - echo "I am job2" > 1.txt
+        - echo "I am job2"
         - echo "I am in test stage"
         
 job3:
@@ -25,5 +25,5 @@ job3:
     tags:
         - alpha
     script:
-        - echo "I am job3" > 2.txt
+        - echo "I am job3"
         - echo "I am in deploy stage"
