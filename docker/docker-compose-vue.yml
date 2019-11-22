@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  violet:
+    image: xxxx.aliyuncs.com/xxx:latest
+    restart: always
+    ports:
+      - 3001:80
