@@ -14,7 +14,7 @@
     export GO111MODULE=on
     go run main.go
 
-## frontend(采用vuejs+element-ui 编写博客前端界面)
+## vue(采用vuejs+element-ui 编写博客前端界面)
     cd frontend
     npm install
     npm run serve
