@@ -6,23 +6,29 @@ stages:
 job1:
     stage: build
     tags:
-        - alpha
+        - basic
     script:
         - pwd
         - echo "I am in build stage"
+    only:
+        - master
         
 job2:
     stage: test
     tags:
-        - alpha
+        - basic
     script:
         - echo "I am job2">>1.txt
         - echo "I am in test stage"
+    only:
+        - master
         
 job3:
     stage: deploy
     tags:
-        - alpha
+        - basic
     script:
         - echo "I am job3"
         - echo "I am in deploy stage"
+    only:
+        - master
