@@ -17,5 +17,7 @@
 /vue/node_modules/*
 /docker/data/*
 /singo/cert/*
+/singo/cert/*
+.gitlab-ci.yml
 go.sum
 
