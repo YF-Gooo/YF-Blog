@@ -3,5 +3,5 @@ FROM nginx:alpine
 ADD . /vue
 WORKDIR /vue
 
-COPY /vue/nginx.conf /etc/nginx/conf.d/default.conf
-COPY /vue/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY dist /usr/share/nginx/html
