@@ -18,3 +18,4 @@
 /docker/data/*
 /singo/cert/*
 go.sum
+
