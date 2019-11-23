@@ -1,28 +1,35 @@
 stages:
-    - build
-    - test
+    - build-vue
+    - build-gin
     - deploy
 
 job1:
-    stage: build
+    stage: build-gin
     tags:
-        - alpha
+        - basic
     script:
-        - pwd
-        - echo "I am in build stage"
+        - cd singo
+        - docker build -t registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:v1.0.0 .
+        - docker push registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:v1.0.0
+    only:
+        - master
         
 job2:
-    stage: test
+    stage: build-vue
     tags:
-        - alpha
+        - basic
     script:
-        - echo "I am job2">>1.txt
-        - echo "I am in test stage"
+        - cd frondend
+        - docker build -t registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.0.0 .
+        - docker push registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.0.0
+    only:
+        - master
         
 job3:
     stage: deploy
     tags:
-        - alpha
+        - basic
     script:
-        - echo "I am job3"
         - echo "I am in deploy stage"
+    only:
+        - master
