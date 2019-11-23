@@ -4,6 +4,17 @@ stages:
     - deploy
 
 job1:
+    stage: build-vue
+    tags:
+        - basic
+    script:
+        - cd frontend
+        - docker build -t registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.0.0 .
+        - docker push registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.0.0
+    only:
+        - master
+
+job2:
     stage: build-gin
     tags:
         - basic
@@ -11,17 +22,6 @@ job1:
         - cd singo
         - docker build -t registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:v1.0.0 .
         - docker push registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:v1.0.0
-    only:
-        - master
-        
-job2:
-    stage: build-vue
-    tags:
-        - basic
-    script:
-        - cd frondend
-        - docker build -t registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.0.0 .
-        - docker push registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.0.0
     only:
         - master
         
