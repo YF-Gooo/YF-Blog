@@ -15,7 +15,6 @@
 .vscode/
 /singo/.env
 /frontend/node_modules/*
-/frontend/dist/*
 /docker/data/*
 /singo/cert/*
 go.sum
