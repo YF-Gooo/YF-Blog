@@ -1,4 +1,4 @@
-FROM node:8.10.0 as build
+FROM node as build
 
 ADD . /frontend
 
