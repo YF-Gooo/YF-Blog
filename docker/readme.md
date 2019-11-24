@@ -12,3 +12,4 @@ sudo service docker restart
     docker-compose up -d
 
 
+docker-compose -f docker-compose-singo.yml up -d

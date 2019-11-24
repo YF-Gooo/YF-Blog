@@ -12,7 +12,7 @@ func Cors() gin.HandlerFunc {
 	config.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Cookie"}
 	if gin.Mode() == gin.ReleaseMode {
 		// 生产环境需要配置跨域域名，否则403
-		config.AllowOrigins = []string{"http://www.example.com"}
+		config.AllowOrigins = []string{"https://www.yfgooo.xyz","http://www.yfgooo.xyz"}
 	} else {
 		config.AllowAllOrigins = true
 	}
