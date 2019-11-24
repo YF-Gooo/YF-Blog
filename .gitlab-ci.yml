@@ -14,7 +14,7 @@ job1:
         - docker build -t registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:$CI_COMMIT_TAG .
         - docker push registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:$CI_COMMIT_TAG
     only:
-        - master
+        - tags
 
 job2:
     stage: build-gin
@@ -27,7 +27,7 @@ job2:
         - docker build -t registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:$CI_COMMIT_TAG .
         - docker push registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:$CI_COMMIT_TAG
     only:
-        - master
+        - tags
         
 job3:
     stage: deploy
@@ -36,4 +36,4 @@ job3:
     script:
         - echo "I am in deploy stage"
     only:
-        - master
+        - tags
