@@ -15,9 +15,10 @@
     go run main.go
 
 ## vue(采用vuejs+element-ui 编写博客前端界面)
-    cd frontend
+    cd vue
     npm install
     npm run serve
+    
 ## 界面展示
 ### 首页
 ![Alt text](./images/home.png)
