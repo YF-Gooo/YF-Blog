@@ -1,13 +1,5 @@
 <template>
-    <div style = "width:250px;height:100%">
-      <div style = "width:200px;margin-left: 10px;;margin-bottom: 20px;"> 
-        <el-input
-            placeholder="筛选"
-            v-model="text"
-            @keyup.enter.native="handlesearch">
-            <i slot="prefix" class="el-input__icon el-icon-search"></i>
-        </el-input>
-      </div>
+    <div style = "width:80%;height:100%">
       <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
       <el-radio-button :label="false">展开</el-radio-button>
       <el-radio-button :label="true">收起</el-radio-button>

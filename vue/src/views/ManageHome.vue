@@ -1,8 +1,24 @@
 <template>
     <div style = "height:100%">
         <el-container>
-        <el-aside width="250px"><SideBar></SideBar></el-aside>
-        <el-main><ArticleManage></ArticleManage></el-main>
+            <el-header>
+                <el-col :xs="{span:10, offset: 0}" :sm="{span: 8, offset: 0}" :md="{span: 6, offset: 0}" :lg="{span: 4, offset: 0}" :xl="{span: 4, offset: 0}">
+                    <el-input
+                        placeholder="筛选"
+                        v-model="text"
+                        @keyup.enter.native="handlesearch">
+                        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                    </el-input>
+                </el-col>
+            </el-header>
+            <el-raw>
+                <el-col :xs="{span:4, offset: 0}" :sm="{span: 3, offset: 0}" :md="{span: 3, offset: 0}" :lg="{span: 3, offset: 0}" :xl="{span: 4, offset: 0}">
+                    <SideBar></SideBar>
+                </el-col>
+                <el-col :xs="{span: 15, offset:3}" :sm="{span: 17, offset: 4}" :md="{span: 19, offset: 2}" :lg="{span: 19, offset: 1}" :xl="{span: 19, offset: 1}">
+                    <ArticleManage></ArticleManage>
+                </el-col>
+            </el-raw>
         </el-container>
     </div>
 </template>

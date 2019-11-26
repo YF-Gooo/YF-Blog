@@ -58,7 +58,7 @@ export default {
               message: "注册成功",
               type: "success"
             });
-            window.location.href="/signin"
+            _this.$router.push("/signin");
           },
           response => console.log("注册失败" + response)
         );

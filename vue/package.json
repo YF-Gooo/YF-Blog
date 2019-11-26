@@ -26,6 +26,8 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
     "vue-svg-icon": "^1.2.9",
     "vue-template-compiler": "^2.6.10"
   },
