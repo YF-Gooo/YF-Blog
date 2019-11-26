@@ -1,26 +1,30 @@
 <template>
-    <div style="margin:2% 10%;">
-        <div style="margin: 20px 0;padding-left:20px;width:20%;">
-        <el-divider content-position="left"><span style = "font-size:20px;font-weight:bolder;color:grey;">标题</span></el-divider>
-        <el-input type="text" placeholder="请输入标题" v-model="title" maxlength="20" show-word-limit >
-        </el-input>
-        </div>
-        <div style="margin: 20px 0;padding-left:20px; width:30%;">
-        <el-divider content-position="left" style = "font-size:15px;font-weight:bolder;color:grey;">描述</el-divider>
-        <el-input type="textarea" placeholder="请输入描述" v-model="info" maxlength="30" show-word-limit>
-        </el-input>
-        </div>
-        <mavon-editor style="min-height: 600px" ref=md v-model="markdown" @imgAdd="imgAdd" @imgDel="imgDel" @save="saveDoc"></mavon-editor>
-        <div style="margin: 20px 0;padding-left:20px;width:20%;">
-            <el-divider content-position="left" style = "font-size:15px;font-weight:bolder;color:grey;">标签</el-divider>
-            <el-input type="text" placeholder="请输入标签';'作为分割符" v-model="tag" maxlength="30" show-word-limit >
-            </el-input>
-        </div>
-        <el-row>
-            <el-button style="margin-top:30px;" round  @click="updateDoc">更新</el-button>
-            <el-button type="success" style="margin-top:30px;" round>草稿</el-button>
-        </el-row>
-    </div>
+    <el-container>
+        <el-main>
+            <el-col :xs="{span: 14, offset: 5}" :sm="{span: 12, offset: 2}" :md="{span: 6, offset: 2}" :lg="{span: 6, offset: 2}" :xl="{span: 6, offset: 2}">
+                <el-divider content-position="left"><el-button type="text" size="medium" style="color:black">标题</el-button></el-divider>
+                <el-input type="text" placeholder="请输入标题" v-model="title" maxlength="20" show-word-limit >
+                </el-input>
+            </el-col>
+            <el-col :xs="{span: 14, offset: 5}" :sm="{span: 12, offset: 2}" :md="{span: 10, offset: 4}" :lg="{span: 10, offset: 4}" :xl="{span: 6, offset: 2}">
+                <el-divider content-position="left"><el-button type="text" size="medium" style="color:black">描述</el-button></el-divider>
+                <el-input type="textarea" placeholder="请输入描述" v-model="info" maxlength="50" show-word-limit>
+                </el-input>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                <mavon-editor class="editor" style="min-height: 600px" ref=md v-model="markdown" :language="language"  @imgAdd="imgAdd" @imgDel="imgDel" @save="saveDoc"></mavon-editor>
+            </el-col>
+            <el-col :xs="{span: 14, offset: 5}" :sm="{span: 10, offset: 2}" :md="{span: 5, offset: 2}" :lg="{span: 5, offset: 2}" :xl="{span: 5, offset: 4}">
+                <el-divider content-position="left"><el-button type="text" size="medium" style="color:black">标签</el-button></el-divider>
+                <el-input type="text" placeholder="请输入标签';'作为分割符" v-model="tag" maxlength="30" show-word-limit >
+                </el-input>
+            </el-col>
+            <el-col :xs="24" :sm="{span: 10, offset: 2}" :md="{span: 10, offset: 5}" :lg="{span: 10, offset: 5}" :xl="{span: 10, offset: 5}">
+                <el-button style="margin-top:30px;" round  @click="uploadDoc" :loading="uploading">发布</el-button>
+                <el-button type="success" style="margin-top:30px;" round>草稿</el-button>
+            </el-col>
+        </el-main>
+    </el-container>
 </template>
 <script>
 // Local Registration
@@ -155,14 +159,14 @@ export default {
 }
 </script>
 <style>
-#editor {
-    margin: auto;
-    width: 50%;
-    height: 580px;
-}
-.mveditor{
-    margin: auto;
-    width: 50%;
-    
-}
+   .editor{
+       margin:2%;
+       margin-right:0;
+   }
+  .el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 </style>

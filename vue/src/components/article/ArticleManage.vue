@@ -43,12 +43,12 @@
       </el-table-column>
       <el-table-column
         label="标签"
-        width="100">
+        width="50">
         <template slot-scope="scope">
           <span >{{ scope.row.tag }}</span>
         </template>
       </el-table-column>
-      <el-table-column align= "center" header-align="center" label="操作">
+      <el-table-column  width="180" label="操作">
         <template slot-scope="scope">
           <el-button size="mini" icon="el-icon-search" @click="handleCheck(scope.row)"></el-button>
           <el-button size="mini" type="primary" icon="el-icon-edit" @click="handleEdit(scope.row)"></el-button>
@@ -129,10 +129,12 @@ export default {
                 );
         },
         handleCheck(row){
-          window.location.href="/articlepage/"+row.id
+          let _this = this;
+          _this.$router.push("/articlepage/"+row.id)
         },
         handleEdit(row) {
-          window.location.href="/updatearticlepage/"+row.id
+          let _this = this;
+          _this.$router.push("/updatearticlepage/"+row.id)
         },
         handleDelete(row) {
           let _this = this;

@@ -1,5 +1,5 @@
 <template>
-    <div style="margin:1% 20%;">
+    <div>
         <p class="title">
           <span>{{this.title}}</span>
         </p>
@@ -9,7 +9,9 @@
         <p class="info">
           <span>简介：{{this.info}}</span>{{this.info}}
         </p>
+        <p class="content">
         <mavon-editor style="min-height: 600px;" ref=md v-model="markdown" :language="language" :toolbarsFlag="toolbarsFlag" :subfield="subfield" :defaultOpen="preview" :editable="editable" ></mavon-editor>
+        </p>
     </div>
 </template>
 <script>
@@ -62,6 +64,9 @@ export default {
 }
 </script>
 <style>
+    p{
+        padding-bottom:10px;
+    }
     .title{
         font-size : 30px;
         font-weight : bolder;

@@ -1,36 +1,42 @@
 <template>
-  <div class="article-list" >
-    <div class="post" v-for="(item,index) of articleList" :key="index">
-      <router-link :to="'/articlepage/'+item.id" class="title">
-          {{item.title}}
-      </router-link>
-      <p class="info">
-          <span>摘要：</span>{{item.info}}
-      </p>
-      <p class="content">
-          <span>内容：</span>{{item.markdown.substr(0, [100])}}
-      </p>
-      <ul class="list-inline">
-        <li>
-          <span>作者：{{item.username}}</span>
-        </li>
-        <li>
-          <span class="link-black text-sm">
-            <i class="el-icon-share" />
-            Share
-          </span>
-        </li>
-        <li>
-          <span class="link-black text-sm">
-            <i class="el-icon-apple">Like </i>
-          </span>
-        </li>
-        <li>
-          <span>时间：{{item.created_at| getTimestamp}}</span>
-        </li>
-      </ul>
-    </div>
-    <div class="block">
+  <div>
+  <div class="article-list">
+    <el-card class="box-card">
+      <div class="post" v-for="(item,index) of articleList" :key="index">
+        <p class="title">  
+          <router-link :to="'/articlepage/'+item.id">
+              {{item.title}}
+          </router-link>
+        </p>
+        <p class="info">
+            <span>摘要：</span>{{item.info}}
+        </p>
+        <p class="content">
+            <span>内容：</span>{{item.markdown.substr(0, [100])}}
+        </p>
+        <ul class="list-inline">
+          <li>
+            <span>作者：{{item.username}}</span>
+          </li>
+          <li>
+            <span class="link-black text-sm">
+              <i class="el-icon-share" />
+              Share
+            </span>
+          </li>
+          <li>
+            <span class="link-black text-sm">
+              <i class="el-icon-apple">Like </i>
+            </span>
+          </li>
+          <li>
+            <span>时间：{{item.created_at| getTimestamp}}</span>
+          </li>
+        </ul>
+      </div>
+    </el-card>
+  </div>
+  <div class="block">
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -137,13 +143,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+p{
+  padding-bottom:10px;
+}
 .article-list {
   margin: 0 20%;
   margin-top:30px;
   .title{
     font-size : 20px;
     font-weight : bolder;
-
   }
   .article-block {
     .description {
@@ -155,7 +163,6 @@ export default {
       font-size: 16px;
       color: #000;
     }
-
 
     .img-circle {
       border-radius: 50%;

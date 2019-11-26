@@ -1,21 +1,20 @@
-version: '3'
-
+version: '2'
 services:
   vue:
-    image: registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.0.0
+    image: registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.0.3
     restart: always
     ports:
       - 3001:80
       
   blog-api:
-    image: registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:v1.0.0
+    image: registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:v1.0.3
     container_name: blog-api
     restart: always
     environment:
       MYSQL_DSN: "root:root@tcp(mysql:3306)/go_blog?charset=utf8&parseTime=True&loc=Local"
       REDIS_ADDR: "redis:6379"
       REDIS_DB: "0"
-      SESSION_SECRET: "rBaXcd1PPrC1"
+      SESSION_SECRET: "rBaXcdwoorC1"
       GIN_MODE: "release"
       IMAGE_STORE: "./static/"
       IMAGE_URL: "/static/"
@@ -30,7 +29,7 @@ services:
     command: [
         '--character-set-server=utf8',
         '--collation-server=utf8_general_ci',
-        '--default-time-zone=+8:00' # 这句不是重点
+        '--default-time-zone=+8:00'
         ]
     restart: always
     ports:
@@ -45,16 +44,12 @@ services:
       - MYSQL_DATABASE=go_blog
 
   redis:
-    # 指定镜像
     image: redis:4
     restart: always
     ports:
-      # 端口映射
       - 6379:6379
     volumes:
-      # 目录映射
       - "./data/redis/conf:/usr/local/etc/redis"
       - "./data/redis/data:/data"
     command:
-      # 执行的命令
       redis-server

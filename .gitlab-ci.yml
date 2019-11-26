@@ -36,4 +36,4 @@ job3:
     script:
         - echo "I am in deploy stage"
     only:
-        - master
+        - tags

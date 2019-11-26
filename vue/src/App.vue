@@ -1,30 +1,17 @@
 <template>
   <div id="app">
-    <el-header style="padding:0px;">
-      <NavBar></NavBar>
-    </el-header>
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import NavBar from '@/layers/NavBar'
-import store from "@/store";
 export default {
   name: 'App',
-  data(){
-    return{
-      showNav:false
-    };
-  },
-  store,
-  components: {
-    NavBar,
-  },
 }
 </script>
 
 <style lang="scss">
+@import "assets/css/reset.css";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,15 +19,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   height:100%;
-}
-.navbar {
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    text-decoration:none;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
