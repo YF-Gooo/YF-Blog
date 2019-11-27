@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="margin:10px 10%;">
         <p class="title">
           <span>{{this.title}}</span>
         </p>
