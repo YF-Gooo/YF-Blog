@@ -45,17 +45,7 @@
     13.增加视频上传以及管理功能
     14.增加人工智能模块
 
-yum -y install openssl*
 
-openssl genrsa -des3 -out server.key 1024            # 用于生成rsa私钥文件
-
-openssl req -new -key server.key -out server.csr     # openssl req 用于生成证书请求
-
-openssl rsa -in server.key -out server_nopwd.key     #利用openssl进行RSA为公钥加密
-
-openssl x509 -req -days 365 -in server.csr -signkey server_nopwd.key -out server.crt
-
-mv server.crt server_nopwd.key /usr/local/nginx/conf/
 
 ## 参考了
     https://github.com/bydmm/singo
