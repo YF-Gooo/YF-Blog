@@ -1,13 +1,13 @@
 version: '2'
 services:
   vue:
-    image: registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.0.3
+    image: registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-vue:v1.1.1
     restart: always
     ports:
       - 3001:80
       
   blog-api:
-    image: registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:v1.0.3
+    image: registry.cn-hangzhou.aliyuncs.com/yfgooo/blog-api:v1.1.1
     container_name: blog-api
     restart: always
     environment:

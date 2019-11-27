@@ -27,17 +27,34 @@ stacks->创建docker-compose
 # https自签名
 apt-get install openssl
 apt-get install libssl-dev
-# cd /etc/nginx/
-创建服务器私钥，命令会让你输入一个口令：
-# openssl genrsa -des3 -out server.key 1024
-创建签名请求的证书（CSR）：
-# openssl req -new -key server.key -out server.csr
-在加载SSL支持的Nginx并使用上述私钥时除去必须的口令：
-# cp server.key server.key.org
-# openssl rsa -in server.key.org -out server.key
-最后标记证书使用上述私钥和CSR：
-# openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt
+# cd /etc/nginx/sites-available/
+openssl genrsa -des3 -out server.key 1024
+openssl rsa -in server.key -out server_nopass.key
+openssl req -new -key server.key -out server.csr
+    Enter pass phrase for server.key: # 之前设置的密码
 
+    -----
+
+    Country Name (2 letter code) [XX]:CN # 国家
+
+    State or Province Name (full name) []:Jilin # 地区或省份
+
+    Locality Name (eg, city) [Default City]:Changchun # 地区局部名
+
+    Organization Name (eg, company) [Default Company Ltd]:Python # 机构名称
+
+    Organizational Unit Name (eg, section) []:Python # 组织单位名称
+
+    Common Name (eg, your name or your server's hostname) []:www.yfgooo.xyz # 网站域名
+
+    Email Address []:123@server.com # 邮箱
+
+    A challenge password []: # 私钥保护密码,可直接回车
+
+    An optional company name []: # 一个可选公司名称,可直接回车
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+下面一步极为重要，一定要用没有密码的server.key,否则报错
+mv server_nopass.key server.key 
 # nginx
 apt install nginx
 scp nginx.conf root@ip:/etc/nginx/sites-available/
