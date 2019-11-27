@@ -15,7 +15,7 @@ func NewRouter() *gin.Engine {
 	r.Use(middleware.Session(os.Getenv("SESSION_SECRET")))
 	r.Use(middleware.Cors())
 	r.Use(middleware.CurrentUser())
-	r.Static("/static", "./static")
+	r.Static("/static", "/static")
 	// 路由
 	v1 := r.Group("/api/v1")
 	{

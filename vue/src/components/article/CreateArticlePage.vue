@@ -97,7 +97,7 @@ export default {
                     message: "上传成功",
                     type: "success"
                     });
-                window.location.href="/articlepage/"+response.data.id
+                _this.$router.push("/articlepage/"+response.data.id);
                 },
                 response => console.log("上传失败" + response)
                 );
