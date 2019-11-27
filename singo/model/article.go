@@ -9,6 +9,6 @@ type Article struct {
 	Info  string
 	UserName  string
 	Tag   string
-	Markdown string
+	Markdown string `sql:"type:text" valid:"required,length(1|10000)"`
 	Public bool
 }
