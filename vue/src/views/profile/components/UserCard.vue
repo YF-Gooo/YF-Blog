@@ -7,9 +7,9 @@
 
     <div class="user-profile">
       <div class="box-center">
-          <div><span>Name:{{name}}</span></div>
-          <div><span>Email:{{email}}</span> </div>
-          <div><span>Role:{{role}}</span> </div>
+          <div><span style="font-size:20px;color: #999;">Name : {{name}}</span></div>
+          <div><span style="margin-bottom:5px;font-size:15px;color: #999;">Email : {{email}}</span> </div>
+          <div><span style="margin-bottom:5px;font-size:15px;color: #999;">Role : {{role}}</span> </div>
       </div>
     </div>
 
@@ -69,7 +69,7 @@ export default {
   data() {
     return {
       name: 'YF',
-      email: 'ucakyj@gmail.com',
+      email: 'aaa@gmail.com',
       avatar: '',
       role: 'DATA SCIENTIST'
     }

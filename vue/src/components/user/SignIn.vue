@@ -20,13 +20,13 @@ export default {
   methods: {
     signin: function() {
       let _this = this;
-      if (this.user_name.length < 6) {
-        this.$message.error("用户名不能为空或小于六个字符");
+      if (this.user_name.length < 3 ||this.user_name.length >15) {
+        this.$message.error("用户名不能为空或小于三个字符或大于十五个字符");
         return;
       }
 
-      if (this.password.length < 8) {
-        this.$message.error("密码不能为空或小于八个字符");
+      if (this.password.length < 8||this.password.length >15) {
+        this.$message.error("密码不能为空或小于八个字符或大于十五个字符");
         return;
       }
       let obj = {

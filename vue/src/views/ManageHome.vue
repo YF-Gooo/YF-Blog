@@ -23,6 +23,7 @@
     </div>
 </template>
 <script>
+import store from '@/store'
 import SideBar from '@/layers/SideBar'
 import ArticleManage from '@/components/article/ArticleManage'
 export default {
@@ -30,6 +31,19 @@ export default {
     components: {
         SideBar,
         ArticleManage,
+    },
+    data() {
+        return {
+        text:"",
+        };
+    },
+    store,
+    methods: {
+        handlesearch(){
+        let _this = this;
+        _this.$store.commit('changeAMSearchKW', _this.text)
+        _this.text=""
+        },
     }
 }
 </script>

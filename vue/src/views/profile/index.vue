@@ -10,14 +10,11 @@
         <el-col :span="18" :xs="24">
           <el-card>
             <el-tabs v-model="activeTab">
-              <el-tab-pane label="Activity" name="activity">
-                <activity />
+              <el-tab-pane label="Resume" name="resume">
+                <resume />
               </el-tab-pane>
               <el-tab-pane label="Timeline" name="timeline">
                 <timeline />
-              </el-tab-pane>
-              <el-tab-pane label="Account" name="account">
-                <account :user="user" />
               </el-tab-pane>
             </el-tabs>
           </el-card>
@@ -31,17 +28,15 @@
 <script>
 
 import UserCard from './components/UserCard'
-import Activity from './components/Activity'
 import Timeline from './components/Timeline'
-import Account from './components/Account'
-
+import Resume from './components/Resume'
 export default {
   name: 'Profile',
-  components: { UserCard, Activity, Timeline, Account },
+  components: { UserCard, Timeline,Resume},
   data() {
     return {
       user: {},
-      activeTab: 'activity',
+      activeTab: 'resume',
     }
   },
   created() {

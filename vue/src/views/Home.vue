@@ -147,11 +147,13 @@ p{
   padding-bottom:10px;
 }
 .article-list {
-  margin: 0 20%;
+  margin: 0 13%;
   margin-top:30px;
   .title{
-    font-size : 20px;
+    font-size : 25px;
     font-weight : bolder;
+    line-height:30px
+    
   }
   .article-block {
     .description {

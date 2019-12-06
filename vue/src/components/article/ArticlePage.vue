@@ -1,13 +1,13 @@
 <template>
     <div style="margin:10px 10%;">
         <p class="title">
-          <span>{{this.title}}</span>
+          <span >{{this.title}}</span>
         </p>
         <p class="info">
-          <span>作者：{{this.username}}</span>
+          <span><h3 style="display:inline-block;line-height:40px;">作者: </h3>{{" "+this.username}}</span>
         </p>
-        <p class="info">
-          <span>简介：{{this.info}}</span>{{this.info}}
+        <p class="info" style="width:80%;line-height:40px;">
+          <span ><h3 style="display:inline-block;">简介: </h3>{{" "+this.info}}</span>{{this.info}}
         </p>
         <p class="content">
         <mavon-editor style="min-height: 600px;" ref=md v-model="markdown" :language="language" :toolbarsFlag="toolbarsFlag" :subfield="subfield" :defaultOpen="preview" :editable="editable" ></mavon-editor>
@@ -68,7 +68,7 @@ export default {
         padding-bottom:10px;
     }
     .title{
-        font-size : 30px;
+        font-size : 20px;
         font-weight : bolder;
         text-align:left;
         color: #666;

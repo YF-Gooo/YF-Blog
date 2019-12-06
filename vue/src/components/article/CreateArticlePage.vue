@@ -8,7 +8,7 @@
             </el-col>
             <el-col :xs="{span: 14, offset: 5}" :sm="{span: 12, offset: 2}" :md="{span: 10, offset: 4}" :lg="{span: 10, offset: 4}" :xl="{span: 6, offset: 2}">
                 <el-divider content-position="left"><el-button type="text" size="medium" style="color:black">描述</el-button></el-divider>
-                <el-input type="textarea" placeholder="请输入描述" v-model="info" maxlength="50" show-word-limit>
+                <el-input type="textarea" placeholder="请输入描述" v-model="info" maxlength="300" show-word-limit>
                 </el-input>
             </el-col>
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">

@@ -15,7 +15,7 @@
             <el-col :xs="12" :sm="12" :md="2" :lg="2" :xl="2"><el-menu-item index="/about">关于我</el-menu-item></el-col>
             <el-col v-if="user!==''" :xs="12" :sm="12" :md="2" :lg="2" :xl="2"><el-menu-item index="/createarticlepage">写文章</el-menu-item></el-col>
             <el-col v-if="user!==''" :xs="12" :sm="12" :md="2" :lg="2" :xl="2"><el-menu-item index="/managehome">管理屋</el-menu-item></el-col>
-            <el-col :xs="24" :sm="{span: 16, offset: 2}" :md="{span: 4, offset: 0}" :lg="{span: 4, offset: 0}" :xl="{span: 4, offset: 0}" style="padding-top:8px">
+            <el-col :xs="20" :sm="{span: 16, offset: 2}" :md="{span: 4, offset: 0}" :lg="{span: 4, offset: 0}" :xl="{span: 4, offset: 0}" style="padding-top:8px">
               <el-input
                 placeholder="请输入内容"
                 v-model="text"
@@ -25,12 +25,10 @@
             </el-input>
           </el-col>
           <div v-if="user!==''">
-            <el-col :xs="{span: 5, offset: 8}" :sm="{span: 2, offset: 1}" :md="2" :lg="{span: 1, offset: 3}" :xl="{span: 1, offset: 3}" style="height:56px;text-align:center;"><el-avatar shape="square" :size="56" :src="avtarUrl"></el-avatar></el-col>
-            <el-col :xs="4" :sm="2" :md="2" :lg="2" :xl="1" style="padding-top:15px">
+            <el-col  style="text-align:center;height:56px;display:flex;justify-content:center;align-items:center;flex-direction:column;" :xs="{span: 2, offset: 0}" :sm="{span: 2, offset: 2}" :md="{span: 2, offset: 5}" :lg="{span: 2, offset: 5}" :xl="{span: 2, offset: 1}">
+              <img style="height:35px;" :src="avtarUrl">
               <el-dropdown @command="handleCommand">
-                <span class="el-dropdown-link" style="color:grey;font-weight:bolder;font-size:15px;">
-                  {{user}}<i class="el-icon-arrow-down el-icon--right"></i>
-                </span>
+                <span class="el-dropdown-link" style="color:grey;font-weight:bolder;font-size:12px;">{{user}}<i class="el-icon-arrow-down el-icon--right"></i></span>
                 <el-dropdown-menu slot="dropdown" trigger="click">
                   <el-dropdown-item command="/">首页</el-dropdown-item>
                   <el-dropdown-item command="/about">关于我</el-dropdown-item>
@@ -96,7 +94,7 @@ export default {
     }
   }
 </script>
-<style>
+<style scoped>
   #search:hover {
     background-color:#eee;
   }

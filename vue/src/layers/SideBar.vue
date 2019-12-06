@@ -39,7 +39,6 @@ import store from '@/store'
 export default {
   data() {
     return {
-      text:"",
       isCollapse: true
     };
   },
@@ -50,12 +49,7 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
-    },
-    handlesearch(){
-    let _this = this;
-    _this.$store.commit('changeAMSearchKW', _this.text)
-    _this.text=""
-    },
+    }
   }
 }
 </script>

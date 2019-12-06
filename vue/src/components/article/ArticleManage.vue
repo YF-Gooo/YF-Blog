@@ -31,7 +31,7 @@
         label="简介"
         width="200">
         <template slot-scope="scope">
-          <span >{{ scope.row.info }}</span>
+          <span >{{ scope.row.info.substr(0, [30]) }}</span>
         </template>
       </el-table-column>
       <el-table-column
